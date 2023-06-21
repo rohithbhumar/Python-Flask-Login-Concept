@@ -9,12 +9,13 @@ from flask_bcrypt import Bcrypt
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-db = SQLAlchemy(app)
+
 bcrypt = Bcrypt(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(base_dir, 'database.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(base_dir, 'users.db')
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
+db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -104,4 +105,6 @@ def register():
 
 
 if __name__ == "__main__":
+    app.app_context().push()
+    db.create_all()
     app.run(debug=True)
