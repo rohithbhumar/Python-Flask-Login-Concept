@@ -10,6 +10,7 @@ Flask-Login
 Flask-SQLAlchemy
 Flask-WTF
 greenlet
+gunicorn
 idna
 importlib-metadata
 itsdangerous
